@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Impostor Navideño 🎄😈</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Pacifico&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --red-primary: #D32F2F;
+            --red-dark: #C62828;
+            --red-light: #EF5350;
+            --white: #FFFFFF;
+            --green-success: #4CAF50;
+            --gold: #FFD700;
+            --shadow-red: rgba(211, 47, 47, 0.3);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, var(--white) 0%, #FFEBEE 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Copos de nieve animados */
+        .snowflakes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1em;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Pantallas */
+        .screen {
+            display: none;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px var(--shadow-red);
+            border: 3px solid var(--red-primary);
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Títulos */
+        .title {
+            font-family: 'Mountains of Christmas', cursive;
+            font-size: 3.5rem;
+            color: var(--red-primary);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.2rem;
+            color: var(--red-dark);
+            margin-bottom: 30px;
+        }
+
+        /* Botones */
+        .btn {
+            background: var(--red-primary);
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            box-shadow: 0 4px 15px var(--shadow-red);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .btn:hover {
+            background: var(--red-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow-red);
+        }
+
+        .btn-large {
+            font-size: 1.3rem;
+            padding: 20px 40px;
+            font-weight: 700;
+        }
+
+        .btn-success {
+            background: var(--green-success);
+        }
+
+        .btn-success:hover {
+            background: #45a049;
+        }
+
+        /* Inputs y controles */
+        .input-group {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 500;
+            color: var(--red-dark);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--red-primary);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: var(--red-light);
+            box-shadow: 0 0 10px var(--shadow-red);
+        }
+
+        /* Slider personalizado */
+        .slider-container {
+            margin: 20px 0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--red-primary);
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--red-primary);
+            cursor: pointer;
+            border: none;
+        }
+
+        .slider-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--red-primary);
+            margin-left: 10px;
+        }
+
+        /* Categorías */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .category-btn {
+            background: var(--white);
+            border: 2px solid var(--red-primary);
+            color: var(--red-primary);
+            padding: 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .category-btn:hover, .category-btn.selected {
+            background: var(--red-primary);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        /* Rol reveal */
+        .role-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid var(--red-primary);
+            animation: flipIn 0.6s ease-out;
+        }
+
+        .role-card.impostor {
+            background: linear-gradient(135deg, var(--red-primary), var(--red-dark));
+            color: var(--white);
+            border-color: var(--red-dark);
+        }
+
+        .role-card.civil {
+            background: linear-gradient(135deg, var(--green-success), #45a049);
+            color: var(--white);
+            border-color: var(--green-success);
+        }
+
+        @keyframes flipIn {
+            0% {
+                transform: rotateY(-90deg);
+                opacity: 0;
+            }
+            100% {
+                transform: rotateY(0);
+                opacity: 1;
+            }
+        }
+
+        .word-display {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Lista de jugadores */
+        .players-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .player-card {
+            background: var(--white);
+            border: 2px solid var(--red-primary);
+            border-radius: 15px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .player-card:hover {
+            background: var(--red-primary);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        .player-card.voted {
+            background: var(--red-primary);
+            color: var(--white);
+        }
+
+        /* Timer */
+        .timer {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--red-primary);
+            margin: 20px 0;
+            font-family: 'Mountains of Christmas', cursive;
+        }
+
+        .timer.warning {
+            color: #FF5722;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Resultados */
+        .results {
+            background: linear-gradient(135deg, var(--gold), #FFC107);
+            color: #333;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .results.impostor-win {
+            background: linear-gradient(135deg, var(--red-primary), var(--red-dark));
+            color: var(--white);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .btn-large {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .categories {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+            
+            .word-display {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animaciones especiales */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Modo oscuro */
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b1b 100%);
+        }
+
+        body.dark-mode .screen {
+            background: #2a2a2a;
+            border-color: var(--red-light);
+            color: var(--white);
+        }
+
+        .dark-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--red-primary);
+            color: var(--white);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Copos de nieve -->
+    <div class="snowflakes" id="snowflakes"></div>
+    
+    <!-- Toggle modo oscuro -->
+    <button class="dark-toggle" onclick="toggleDarkMode()">🌙</button>
+
+    <div class="container">
+        <!-- Pantalla de inicio -->
+        <div class="screen active" id="homeScreen">
+            <h1 class="title">¡EL IMPOSTOR NAVIDEÑO! 🎄😈</h1>
+            <p class="subtitle">Todos saben la palabra secreta... excepto el impostor 🎅</p>
+            
+            <div class="input-group">
+                <label for="playersSlider">Número de jugadores: <span class="slider-value" id="playersValue">8</span></label>
+                <input type="range" id="playersSlider" class="slider" min="3" max="20" value="8">
+            </div>
+            
+            <div class="input-group">
+                <label for="impostorsSelect">Número de impostores:</label>
+                <select id="impostorsSelect">
+                    <option value="1">1 Impostor</option>
+                    <option value="2">2 Impostores</option>
+                    <option value="3">3 Impostores</option>
+                    <option value="random">Aleatorio 🎲</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label>Categoría:</label>
+                <div class="categories" id="categories">
+                    <button class="category-btn selected" data-category="navidad">🎄 Navidad</button>
+                    <button class="category-btn" data-category="comida">🍕 Comida</button>
+                    <button class="category-btn" data-category="animales">🐶 Animales</button>
+                    <button class="category-btn" data-category="profesiones">👔 Profesiones</button>
+                    <button class="category-btn" data-category="paises">🌍 Países</button>
+                    <button class="category-btn" data-category="peliculas">🎬 Películas</button>
+                    <button class="category-btn" data-category="celebridades">⭐ Celebridades</button>
+                    <button class="category-btn" data-category="deportes">⚽ Deportes</button>
+                    <button class="category-btn" data-category="marcas">🏷️ Marcas</button>
+                    <button class="category-btn" data-category="objetos">🏠 Objetos</button>
+                    <button class="category-btn" data-category="personalizadas">✏️ Personalizadas</button>
+                </div>
+            </div>
+            
+            <div class="input-group" id="customWordsGroup" style="display: none;">
+                <label for="customWords">Palabras personalizadas (separadas por comas):</label>
+                <textarea id="customWords" rows="4" placeholder="Ejemplo: chocolate, regalo, nieve, villancico..."></textarea>
+            </div>
+            
+            <button class="btn btn-large" onclick="startGame()">¡EMPEZAR PARTIDA! 🎅</button>
+        </div>
+
+        <!-- Pantalla de asignación de roles -->
+        <div class="screen" id="roleScreen">
+            <h2 class="title">Asignación de Roles 🎁</h2>
+            <p class="subtitle">Pasad el dispositivo. Pulsad cuando estéis listos</p>
+            
+            <div id="playerCounter">
+                <h3>Jugador <span id="currentPlayer">1</span> de <span id="totalPlayers">8</span></h3>
+            </div>
+            
+            <div class="input-group">
+                <label for="playerName">Nombre (opcional):</label>
+                <input type="text" id="playerName" placeholder="Tu nombre...">
+            </div>
+            
+            <button class="btn btn-large" id="revealRoleBtn" onclick="revealRole()">VER MI ROL SECRETO 🎁</button>
+            
+            <div id="roleReveal" style="display: none;">
+                <div class="role-card" id="roleCard">
+                    <div id="roleContent"></div>
+                </div>
+                <button class="btn" onclick="nextPlayer()">SIGUIENTE JUGADOR ➡️</button>
+            </div>
+        </div>
+
+        <!-- Pantalla de pistas -->
+        <div class="screen" id="cluesScreen">
+            <h2 class="title">RONDA <span id="roundNumber">1</span>/3 🎄</h2>
+            
+            <div id="turnInfo">
+                <h3>Turno de <span id="currentTurnPlayer">Jugador 1</span> 🗣️</h3>
+                <p class="subtitle">Di en voz alta una palabra relacionada con la palabra secreta</p>
+            </div>
+            
+            <button class="btn btn-large" onclick="nextTurn()">SIGUIENTE</button>
+            
+            <div id="roundSummary" style="display: none;">
+                <h3>Resumen de la ronda:</h3>
+                <div id="summaryList"></div>
+                <button class="btn" onclick="nextRound()">SIGUIENTE RONDA</button>
+            </div>
+        </div>
+
+        <!-- Pantalla de votación -->
+        <div class="screen" id="votingScreen">
+            <h2 class="title">¡HORA DE VOTAR! 🗳️</h2>
+            <p class="subtitle">¿Quién creéis que es el impostor?</p>
+            
+            <div class="timer" id="votingTimer">5:00</div>
+            
+            <div class="players-list" id="playersList"></div>
+            
+            <button class="btn btn-large" onclick="finishVoting()">FINALIZAR VOTACIÓN</button>
+            
+            <div id="impostorGuess" style="display: none;">
+                <h3>¡Última oportunidad impostores! 🎯</h3>
+                <p>¿Podéis adivinar la palabra secreta?</p>
+                <div class="input-group">
+                    <input type="text" id="guessInput" placeholder="Vuestra respuesta...">
+                </div>
+                <button class="btn" onclick="checkGuess()">ADIVINAR</button>
+            </div>
+        </div>
+
+        <!-- Pantalla de resultados -->
+        <div class="screen" id="resultsScreen">
+            <div class="results" id="resultsCard">
+                <h2 id="winnerTitle"></h2>
+                <div id="revealedRoles"></div>
+                <p id="secretWord"></p>
+            </div>
+            
+            <button class="btn btn-large" onclick="newGame()">NUEVA PARTIDA 🎄</button>
+            <button class="btn" onclick="goHome()">VOLVER AL MENÚ 🏠</button>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales del juego
+        let gameState = {
+            players: [],
+            impostors: [],
+            currentPlayer: 0,
+            currentRound: 1,
+            currentTurn: 0,
+            turnOrder: [],
+            secretWord: '',
+            category: 'navidad',
+            votes: {},
+            votingTimer: null,
+            votingTimeLeft: 300 // 5 minutos
+        };
+
+        // Base de datos de palabras por categoría
+        const wordDatabase = {
+            navidad: [
+                'Papá Noel', 'Santa Claus', 'Reno', 'Rodolfo', 'Trineo', 'Elfos', 'Duendes',
+                'Árbol de Navidad', 'Estrella de Belén', 'Belén', 'Portal', 'Pesebre',
+                'Regalos', 'Presents', 'Calcetines navideños', 'Chimenea', 'Muérdago',
+                'Acebo', 'Corona navideña', 'Guirnalda', 'Luces navideñas', 'Bombillas',
+                'Villancicos', 'Noche de Paz', 'Jingle Bells', 'Campanas', 'Campanillas',
+                'Nieve', 'Copos de nieve', 'Muñeco de nieve', 'Bola de nieve',
+                'Chocolate caliente', 'Ponche', 'Sidra', 'Turrón', 'Mazapán', 'Polvorones',
+                'Roscón de Reyes', 'Panettone', 'Stollen', 'Galletas navideñas',
+                'Bastón de caramelo', 'Caramelos', 'Dulces navideños',
+                'Nochebuena', 'Nochevieja', 'Año Nuevo', 'Fin de año', 'Uvas de la suerte',
+                'Reyes Magos', 'Melchor', 'Gaspar', 'Baltasar', 'Cabalgata', 'Camello',
+                'Oro', 'Incienso', 'Mirra', 'Estrella de Oriente',
+                'Grinch', 'Scrooge', 'Cuento de Navidad', 'Cascanueces',
+                'Calendario de Adviento', 'Corona de Adviento', 'Velas',
+                'Mercadillo navideño', 'Feria navideña', 'Patinaje sobre hielo',
+                'Trineo de perros', 'Polo Norte', 'Laponia', 'Finlandia',
+                'Carta a Papá Noel', 'Lista de regalos', 'Niño bueno', 'Niño malo',
+                'Carbón dulce', 'Carboncillo', 'Zapatillas', 'Pijama navideño',
+                'Jersey navideño', 'Gorro de Papá Noel', 'Barba blanca',
+                'Trineo volador', 'Magia navideña', 'Espíritu navideño',
+                'Familia', 'Reunión familiar', 'Cena navideña', 'Mesa navideña',
+                'Brindis', 'Champán', 'Cava', 'Feliz Navidad', 'Próspero Año Nuevo',
+                'Paz en la Tierra', 'Buena voluntad', 'Generosidad', 'Solidaridad',
+                'Caridad', 'Donaciones', 'Banco de alimentos', 'Voluntariado',
+                'Natividad', 'Nacimiento', 'Jesús', 'María', 'José', 'Ángeles',
+                'Pastores', 'Rebaño', 'Ovejas', 'Establo', 'Paja', 'Buey', 'Mula',
+                'Adoración', 'Epifanía', 'Bautismo', 'Bendición'
+            ],
+            comida: [
+                'Pizza', 'Hamburguesa', 'Pasta', 'Sushi', 'Tacos', 'Paella', 'Risotto',
+                'Lasaña', 'Carbonara', 'Bolognesa', 'Pesto', 'Gazpacho', 'Tortilla',
+                'Croquetas', 'Jamón', 'Queso', 'Pan', 'Croissant', 'Baguette',
+                'Chocolate', 'Helado', 'Tarta', 'Pastel', 'Galletas', 'Donuts',
+                'Café', 'Té', 'Zumo', 'Agua', 'Vino', 'Cerveza', 'Cóctel',
+                'Ensalada', 'Verduras', 'Frutas', 'Manzana', 'Plátano', 'Naranja',
+                'Pollo', 'Ternera', 'Cerdo', 'Pescado', 'Salmón', 'Atún',
+                'Arroz', 'Patatas', 'Huevos', 'Leche', 'Mantequilla', 'Aceite'
+            ],
+            animales: [
+                'Perro', 'Gato', 'León', 'Tigre', 'Elefante', 'Jirafa', 'Cebra',
+                'Mono', 'Gorila', 'Oso', 'Lobo', 'Zorro', 'Conejo', 'Ratón',
+                'Caballo', 'Vaca', 'Cerdo', 'Oveja', 'Cabra', 'Gallina', 'Pato',
+                'Águila', 'Halcón', 'Búho', 'Loro', 'Pingüino', 'Flamenco',
+                'Tiburón', 'Ballena', 'Delfín', 'Pulpo', 'Medusa', 'Pez',
+                'Serpiente', 'Cocodrilo', 'Lagarto', 'Tortuga', 'Rana', 'Sapo',
+                'Araña', 'Abeja', 'Mariposa', 'Hormiga', 'Mosquito', 'Mosca'
+            ],
+            profesiones: [
+                'Médico', 'Enfermero', 'Profesor', 'Ingeniero', 'Abogado', 'Policía',
+                'Bombero', 'Piloto', 'Azafata', 'Chef', 'Camarero', 'Vendedor',
+                'Mecánico', 'Electricista', 'Fontanero', 'Carpintero', 'Pintor',
+                'Arquitecto', 'Diseñador', 'Programador', 'Periodista', 'Fotógrafo',
+                'Actor', 'Cantante', 'Músico', 'Bailarín', 'Deportista', 'Entrenador',
+                'Peluquero', 'Dentista', 'Veterinario', 'Farmacéutico', 'Psicólogo',
+                'Contador', 'Banquero', 'Secretario', 'Recepcionista', 'Limpiador'
+            ],
+            paises: [
+                'España', 'Francia', 'Italia', 'Alemania', 'Reino Unido', 'Portugal',
+                'Holanda', 'Bélgica', 'Suiza', 'Austria', 'Grecia', 'Turquía',
+                'Estados Unidos', 'Canadá', 'México', 'Brasil', 'Argentina', 'Chile',
+                'Japón', 'China', 'India', 'Corea del Sur', 'Tailandia', 'Australia',
+                'Egipto', 'Marruecos', 'Sudáfrica', 'Kenia', 'Nigeria', 'Rusia',
+                'Polonia', 'República Checa', 'Hungría', 'Rumania', 'Bulgaria'
+            ],
+            peliculas: [
+                'Titanic', 'Avatar', 'Avengers', 'Star Wars', 'Harry Potter', 'Batman',
+                'Superman', 'Spider-Man', 'Iron Man', 'Frozen', 'Toy Story', 'Shrek',
+                'El Rey León', 'Buscando a Nemo', 'Cars', 'Monsters Inc', 'Up',
+                'Coco', 'Moana', 'Encanto', 'Jurassic Park', 'Matrix', 'Terminator',
+                'Alien', 'Predator', 'Rocky', 'Rambo', 'Fast & Furious', 'Mission Impossible',
+                'James Bond', 'Indiana Jones', 'Pirates of the Caribbean', 'Transformers'
+            ],
+            celebridades: [
+                'Leonardo DiCaprio', 'Brad Pitt', 'Angelina Jolie', 'Will Smith',
+                'Tom Cruise', 'Johnny Depp', 'Robert Downey Jr', 'Scarlett Johansson',
+                'Jennifer Lawrence', 'Emma Stone', 'Ryan Gosling', 'Chris Evans',
+                'Dwayne Johnson', 'Vin Diesel', 'Jason Statham', 'Keanu Reeves',
+                'Morgan Freeman', 'Samuel L Jackson', 'Denzel Washington', 'Al Pacino',
+                'Robert De Niro', 'Anthony Hopkins', 'Meryl Streep', 'Julia Roberts'
+            ],
+            deportes: [
+                'Fútbol', 'Baloncesto', 'Tenis', 'Golf', 'Natación', 'Atletismo',
+                'Ciclismo', 'Boxeo', 'Karate', 'Judo', 'Taekwondo', 'Esgrima',
+                'Gimnasia', 'Halterofilia', 'Escalada', 'Surf', 'Esquí', 'Snowboard',
+                'Patinaje', 'Hockey', 'Rugby', 'Voleibol', 'Balonmano', 'Waterpolo',
+                'Béisbol', 'Softball', 'Cricket', 'Ping Pong', 'Bádminton', 'Squash'
+            ],
+            marcas: [
+                'Apple', 'Samsung', 'Google', 'Microsoft', 'Amazon', 'Facebook',
+                'Nike', 'Adidas', 'Puma', 'Reebok', 'Coca Cola', 'Pepsi',
+                'McDonald\'s', 'KFC', 'Burger King', 'Starbucks', 'Subway',
+                'Toyota', 'BMW', 'Mercedes', 'Audi', 'Ferrari', 'Lamborghini',
+                'Rolex', 'Omega', 'Cartier', 'Gucci', 'Prada', 'Louis Vuitton'
+            ],
+            objetos: [
+                'Mesa', 'Silla', 'Sofá', 'Cama', 'Armario', 'Televisión', 'Ordenador',
+                'Teléfono', 'Reloj', 'Lámpara', 'Espejo', 'Cuadro', 'Libro', 'Bolígrafo',
+                'Lápiz', 'Papel', 'Tijeras', 'Pegamento', 'Grapadora', 'Calculadora',
+                'Teclado', 'Ratón', 'Pantalla', 'Altavoces', 'Auriculares', 'Micrófono',
+                'Cámara', 'Impresora', 'Escáner', 'Router', 'Cable', 'Enchufe'
+            ]
+        };
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeGame();
+            createSnowflakes();
+            loadSettings();
+        });
+
+        function initializeGame() {
+            // Configurar slider de jugadores
+            const playersSlider = document.getElementById('playersSlider');
+            const playersValue = document.getElementById('playersValue');
+            
+            playersSlider.addEventListener('input', function() {
+                playersValue.textContent = this.value;
+            });
+
+            // Configurar botones de categoría
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    categoryBtns.forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    gameState.category = this.dataset.category;
+                    
+                    const customWordsGroup = document.getElementById('customWordsGroup');
+                    if (this.dataset.category === 'personalizadas') {
+                        customWordsGroup.style.display = 'block';
+                    } else {
+                        customWordsGroup.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        function createSnowflakes() {
+            const snowflakesContainer = document.getElementById('snowflakes');
+            const snowflakeSymbols = ['❄', '❅', '❆', '✻', '✼', '❋'];
+            
+            for (let i = 0; i < 50; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.innerHTML = snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                snowflake.style.animationDelay = Math.random() * 2 + 's';
+                snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                snowflakesContainer.appendChild(snowflake);
+            }
+        }
+
+        function startGame() {
+            const numPlayers = parseInt(document.getElementById('playersSlider').value);
+            const numImpostors = document.getElementById('impostorsSelect').value;
+            
+            // Inicializar jugadores
+            gameState.players = [];
+            for (let i = 1; i <= numPlayers; i++) {
+                gameState.players.push({
+                    id: i,
+                    name: `Jugador ${i}`,
+                    isImpostor: false,
+                    votes: 0
+                });
+            }
+            
+            // Asignar impostores
+            let impostorCount;
+            if (numImpostors === 'random') {
+                impostorCount = Math.max(1, Math.floor(numPlayers / 4));
+            } else {
+                impostorCount = parseInt(numImpostors);
+            }
+            
+            const shuffledPlayers = [...gameState.players].sort(() => Math.random() - 0.5);
+            for (let i = 0; i < impostorCount; i++) {
+                shuffledPlayers[i].isImpostor = true;
+            }
+            
+            gameState.impostors = gameState.players.filter(p => p.isImpostor);
+            
+            // Seleccionar palabra secreta
+            selectSecretWord();
+            
+            // Ir a pantalla de roles
+            showScreen('roleScreen');
+            document.getElementById('totalPlayers').textContent = numPlayers;
+            gameState.currentPlayer = 0;
+            updatePlayerCounter();
+        }
+
+        function selectSecretWord() {
+            let words;
+            if (gameState.category === 'personalizadas') {
+                const customWords = document.getElementById('customWords').value;
+                words = customWords.split(/[,\n]/).map(w => w.trim()).filter(w => w.length > 0);
+                if (words.length === 0) {
+                    words = wordDatabase.navidad; // Fallback a navidad
+                }
+            } else {
+                words = wordDatabase[gameState.category] || wordDatabase.navidad;
+            }
+            
+            gameState.secretWord = words[Math.floor(Math.random() * words.length)];
+        }
+
+        function updatePlayerCounter() {
+            document.getElementById('currentPlayer').textContent = gameState.currentPlayer + 1;
+        }
+
+        function revealRole() {
+            const player = gameState.players[gameState.currentPlayer];
+            const roleReveal = document.getElementById('roleReveal');
+            const roleCard = document.getElementById('roleCard');
+            const roleContent = document.getElementById('roleContent');
+            
+            // Actualizar nombre si se proporcionó
+            const playerName = document.getElementById('playerName').value.trim();
+            if (playerName) {
+                player.name = playerName;
+            }
+            
+            roleReveal.style.display = 'block';
+            document.getElementById('revealRoleBtn').style.display = 'none';
+            
+            if (player.isImpostor) {
+                roleCard.className = 'role-card impostor';
+                roleContent.innerHTML = `
+                    <h2>¡ERES EL IMPOSTOR! 😈🎅</h2>
+                    <p>Finge que sabes la palabra secreta...</p>
+                    <p><strong>¡No te pillen!</strong></p>
+                    <div style="font-size: 3rem; margin: 20px 0;">🎭🔥</div>
+                `;
+            } else {
+                roleCard.className = 'role-card civil';
+                const emoji = getWordEmoji(gameState.secretWord);
+                roleContent.innerHTML = `
+                    <h2>ERES UN CIVIL 👼</h2>
+                    <p>La palabra secreta es:</p>
+                    <div class="word-display">${gameState.secretWord} ${emoji}</div>
+                    <p>¡Encuentra a los impostores!</p>
+                `;
+            }
+        }
+
+        function getWordEmoji(word) {
+            const emojiMap = {
+                'Papá Noel': '🎅', 'Santa Claus': '🎅', 'Reno': '🦌', 'Árbol de Navidad': '🎄',
+                'Regalos': '🎁', 'Nieve': '❄️', 'Villancicos': '🎵', 'Campanas': '🔔',
+                'Pizza': '🍕', 'Hamburguesa': '🍔', 'Sushi': '🍣', 'Chocolate': '🍫',
+                'Perro': '🐶', 'Gato': '🐱', 'León': '🦁', 'Elefante': '🐘'
+            };
+            return emojiMap[word] || '⭐';
+        }
+
+        function nextPlayer() {
+            gameState.currentPlayer++;
+            
+            if (gameState.currentPlayer >= gameState.players.length) {
+                // Todos los jugadores han visto su rol, empezar rondas de pistas
+                startCluesPhase();
+            } else {
+                // Siguiente jugador
+                updatePlayerCounter();
+                document.getElementById('playerName').value = '';
+                document.getElementById('roleReveal').style.display = 'none';
+                document.getElementById('revealRoleBtn').style.display = 'block';
+            }
+        }
+
+        function startCluesPhase() {
+            showScreen('cluesScreen');
+            gameState.currentRound = 1;
+            gameState.currentTurn = 0;
+            
+            // Crear orden aleatorio para los turnos
+            gameState.turnOrder = [...gameState.players].sort(() => Math.random() - 0.5);
+            
+            updateCluesScreen();
+        }
+
+        function updateCluesScreen() {
+            document.getElementById('roundNumber').textContent = gameState.currentRound;
+            const currentPlayer = gameState.turnOrder[gameState.currentTurn];
+            document.getElementById('currentTurnPlayer').textContent = currentPlayer.name;
+        }
+
+        function nextTurn() {
+            gameState.currentTurn++;
+            
+            if (gameState.currentTurn >= gameState.players.length) {
+                // Fin de la ronda
+                showRoundSummary();
+            } else {
+                updateCluesScreen();
+            }
+        }
+
+        function showRoundSummary() {
+            const summaryList = document.getElementById('summaryList');
+            summaryList.innerHTML = '';
+            
+            gameState.turnOrder.forEach((player, index) => {
+                const div = document.createElement('div');
+                div.innerHTML = `${index + 1}. ${player.name} 🗣️`;
+                div.style.padding = '5px';
+                div.style.margin = '5px 0';
+                div.style.background = 'rgba(211, 47, 47, 0.1)';
+                div.style.borderRadius = '5px';
+                summaryList.appendChild(div);
+            });
+            
+            document.getElementById('roundSummary').style.display = 'block';
+        }
+
+        function nextRound() {
+            gameState.currentRound++;
+            
+            if (gameState.currentRound > 3) {
+                // Fin de las pistas, empezar votación
+                startVotingPhase();
+            } else {
+                // Nueva ronda
+                gameState.currentTurn = 0;
+                gameState.turnOrder = [...gameState.players].sort(() => Math.random() - 0.5);
+                document.getElementById('roundSummary').style.display = 'none';
+                updateCluesScreen();
+            }
+        }
+
+        function startVotingPhase() {
+            showScreen('votingScreen');
+            createPlayersList();
+            startVotingTimer();
+        }
+
+        function createPlayersList() {
+            const playersList = document.getElementById('playersList');
+            playersList.innerHTML = '';
+            
+            gameState.players.forEach(player => {
+                const playerCard = document.createElement('div');
+                playerCard.className = 'player-card';
+                playerCard.innerHTML = `
+                    <h3>${player.name}</h3>
+                    <p>Votos: <span id="votes-${player.id}">0</span></p>
+                `;
+                playerCard.onclick = () => votePlayer(player.id);
+                playersList.appendChild(playerCard);
+            });
+        }
+
+        function votePlayer(playerId) {
+            if (!gameState.votes[playerId]) {
+                gameState.votes[playerId] = 0;
+            }
+            gameState.votes[playerId]++;
+            
+            document.getElementById(`votes-${playerId}`).textContent = gameState.votes[playerId];
+            
+            // Efecto visual
+            event.target.closest('.player-card').classList.add('voted');
+            setTimeout(() => {
+                event.target.closest('.player-card').classList.remove('voted');
+            }, 300);
+        }
+
+        function startVotingTimer() {
+            gameState.votingTimeLeft = 300; // 5 minutos
+            updateTimerDisplay();
+            
+            gameState.votingTimer = setInterval(() => {
+                gameState.votingTimeLeft--;
+                updateTimerDisplay();
+                
+                if (gameState.votingTimeLeft <= 0) {
+                    clearInterval(gameState.votingTimer);
+                    finishVoting();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(gameState.votingTimeLeft / 60);
+            const seconds = gameState.votingTimeLeft % 60;
+            const timerElement = document.getElementById('votingTimer');
+            timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (gameState.votingTimeLeft <= 60) {
+                timerElement.classList.add('warning');
+            }
+        }
+
+        function finishVoting() {
+            if (gameState.votingTimer) {
+                clearInterval(gameState.votingTimer);
+            }
+            
+            // Verificar si hay impostores
+            const hasImpostors = gameState.impostors.length > 0;
+            
+            if (hasImpostors) {
+                // Mostrar opción de adivinanza para impostores
+                document.getElementById('impostorGuess').style.display = 'block';
+            } else {
+                showResults();
+            }
+        }
+
+        function checkGuess() {
+            const guess = document.getElementById('guessInput').value.trim().toLowerCase();
+            const secretWord = gameState.secretWord.toLowerCase();
+            
+            if (guess === secretWord) {
+                // Impostores ganan por adivinanza
+                showResults(true);
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults(impostorsWinByGuess = false) {
+            showScreen('resultsScreen');
+            
+            const resultsCard = document.getElementById('resultsCard');
+            const winnerTitle = document.getElementById('winnerTitle');
+            const revealedRoles = document.getElementById('revealedRoles');
+            const secretWordElement = document.getElementById('secretWord');
+            
+            // Determinar ganador
+            let impostorsWin = impostorsWinByGuess;
+            if (!impostorsWinByGuess) {
+                // Contar votos para determinar si algún impostor fue expulsado
+                const mostVoted = Object.keys(gameState.votes).reduce((a, b) => 
+                    gameState.votes[a] > gameState.votes[b] ? a : b, 
+                    Object.keys(gameState.votes)[0]
+                );
+                
+                const votedPlayer = gameState.players.find(p => p.id == mostVoted);
+                impostorsWin = !votedPlayer || !votedPlayer.isImpostor;
+            }
+            
+            // Configurar resultados
+            if (impostorsWin) {
+                resultsCard.classList.add('impostor-win');
+                winnerTitle.innerHTML = impostorsWinByGuess ? 
+                    '¡LOS IMPOSTORES GANAN! 🎯😈<br>¡Adivinaron la palabra!' :
+                    '¡LOS IMPOSTORES GANAN! 😈🎅<br>¡No los pillasteis!';
+                createConfetti('#D32F2F');
+            } else {
+                winnerTitle.innerHTML = '¡LOS CIVILES GANAN! 🎉🎄<br>¡Pillasteis al impostor!';
+                createConfetti('#FFD700');
+            }
+            
+            // Mostrar roles
+            let rolesHTML = '<h3>Roles revelados:</h3>';
+            gameState.players.forEach(player => {
+                const roleIcon = player.isImpostor ? '😈' : '👼';
+                const roleText = player.isImpostor ? 'IMPOSTOR' : 'CIVIL';
+                rolesHTML += `<p>${roleIcon} ${player.name}: ${roleText}</p>`;
+            });
+            revealedRoles.innerHTML = rolesHTML;
+            
+            secretWordElement.innerHTML = `<strong>La palabra secreta era: ${gameState.secretWord} ${getWordEmoji(gameState.secretWord)}</strong>`;
+        }
+
+        function createConfetti(color) {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = color;
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3000);
+            }
+        }
+
+        function newGame() {
+            // Resetear estado del juego
+            gameState = {
+                players: [],
+                impostors: [],
+                currentPlayer: 0,
+                currentRound: 1,
+                currentTurn: 0,
+                turnOrder: [],
+                secretWord: '',
+                category: gameState.category,
+                votes: {},
+                votingTimer: null,
+                votingTimeLeft: 300
+            };
+            
+            showScreen('homeScreen');
+        }
+
+        function goHome() {
+            newGame();
+        }
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            document.querySelector('.dark-toggle').textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('darkMode', isDark);
+        }
+
+        function loadSettings() {
+            const darkMode = localStorage.getItem('darkMode') === 'true';
+            if (darkMode) {
+                document.body.classList.add('dark-mode');
+                document.querySelector('.dark-toggle').textContent = '☀️';
+            }
+        }
+
+        // Efectos de sonido (opcional, comentado para evitar problemas de autoplay)
+        /*
+        function playSound(type) {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            let frequency;
+            
+            switch(type) {
+                case 'click': frequency = 800; break;
+                case 'success': frequency = 1000; break;
+                case 'error': frequency = 400; break;
+                default: frequency = 600;
+            }
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = frequency;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        }
+        */
+
+        // Mensajes navideños aleatorios
+        const christmasMessages = [
+            "¡No confíes ni en Papá Noel! 😏",
+            "¡Traición bajo el muérdago! 🎄",
+            "¡Que la magia navideña os acompañe! ✨",
+            "¡Ho ho ho... o tal vez no! 🎅",
+            "¡Cuidado con los elfos traviesos! 🧝‍♂️",
+            "¡La Navidad está llena de sorpresas! 🎁"
+        ];
+
+        function showRandomMessage() {
+            const message = christmasMessages[Math.floor(Math.random() * christmasMessages.length)];
+            // Aquí podrías mostrar el mensaje en algún lugar de la UI
+            console.log(message);
+        }
+
+        // Llamar mensaje aleatorio cada cierto tiempo
+        setInterval(showRandomMessage, 30000);
+    </script>
+</body>
+</html>
